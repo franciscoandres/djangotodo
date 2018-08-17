@@ -25,11 +25,13 @@
         <a href="{% url 'todos-update' task.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{ task.text }}</h5>
-            {% if task.is_completed %}
-              <div>
-                <span class="badge badge-success badge-pill">Done</span>
-              </div>
-            {% endif %}
+            <div>
+              {% if task.is_completed %}
+                <span class="badge badge-success badge-pill">Completed</span>
+              {% else %}
+                <span class="badge badge-danger badge-pill">Incomplete</span>
+              {% endif %}
+            </div>
           </div>
           <small class="mb-1">{{ task.created_at | naturaltime }}</small>
         </a>

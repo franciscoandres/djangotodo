@@ -107,7 +107,7 @@
           {{ form.password1.label_tag }}
           <input 
             name="{{ form.password1.name }}" 
-            type="text" class="form-control {% if form.password1.errors %}is-invalid{% endif %}" 
+            type="password" class="form-control {% if form.password1.errors %}is-invalid{% endif %}" 
             id="{{ form.password1.id_for_label }}" 
             {% if form.password1.value != None %}value="{{ form.password1.value|stringformat:'s' }}"{% endif %}
             maxlength="{{ form.password1.field.max_length }}" 
@@ -127,7 +127,7 @@
           {{ form.password2.label_tag }}
           <input 
             name="{{ form.password2.name }}" 
-            type="text" class="form-control {% if form.password2.errors %}is-invalid{% endif %}" 
+            type="password" class="form-control {% if form.password2.errors %}is-invalid{% endif %}" 
             id="{{ form.password2.id_for_label }}" 
             {% if form.password2.value != None %}value="{{ form.password2.value|stringformat:'s' }}"{% endif %}
             maxlength="{{ form.password2.field.max_length }}" 
@@ -146,5 +146,12 @@
       </div>
       <button type="submit" class="btn btn-primary">Register</button>
     </form>
+    <hr>
+    <div>
+      <div class="text-center">
+        <p class="lead">or</p>
+        <p><a href="{% url 'login' %}">Login</a></p>
+      </div>
+    </div>
   </div>
 {% endblock %}
