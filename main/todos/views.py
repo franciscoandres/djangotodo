@@ -1,17 +1,15 @@
-from django.urls import reverse_lazy
-from django.shortcuts import render
 from django.views.generic import CreateView, UpdateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-
 from django.contrib.auth.models import User
+
 from .models import Task
 from .forms import UpdateTaskFormCustom
 
 # Create your views here.
 class HomeView(LoginRequiredMixin, ListView):
   model = Task
-  paginate_by = 20
+  paginate_by = 10
   
   def get_queryset(self):
     return Task.objects.filter(user_id=self.request.user)
