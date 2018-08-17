@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} Add task {% endblock %}
+
+{% block content %}
+
+  <div class="col-md-4 mx-auto py-5">
+    <h3>Add task</h3>
+    <form method="POST">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <ul class="list-unstyled">
+          {% for error in form.non_field_errors %}
+            <li>
+              <div class="alert alert-danger" role="alert">
+                {{ error }}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <div class="form-group">
+        {{ form.text.label_tag }}
+        <input 
+          name="{{ form.text.name }}" 
+          type="text" class="form-control {% if form.text.errors %}is-invalid{% endif %}" 
+          id="{{ form.text.id_for_label }}"
+          {% if form.text.value != None %}value="{{ form.text.value|stringformat:'s' }}"{% endif %}
+          maxlength="{{ form.text.field.max_length }}" 
+          placeholder="Text">
+          {% if form.text.help_text %}
+            <small class="form-text text-muted">{{ form.text.help_text }}</small>
+          {% endif %}
+          <div class="invalid-feedback">
+            <ul class="list-unstyled">
+              {% for error in form.text.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+      <a class="btn btn-outline-secondary" href="{% url 'todos-index' %}">Back</a>
+    </form>
+  </div>
+
+{% endblock %}

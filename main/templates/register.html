@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+  <div class="col-md-9 mx-auto">
+    <h3>Register</h3>
+    <form method="POST">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <ul class="list-unstyled">
+          {% for error in form.non_field_errors %}
+            <li>
+              <div class="alert alert-danger" role="alert">
+                {{ error }}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          {{ form.username.label_tag }}
+          <input 
+            name="{{ form.username.name }}" 
+            type="text" class="form-control {% if form.username.errors %}is-invalid{% endif %}" 
+            id="{{ form.username.id_for_label }}"
+            {% if form.username.value != None %}value="{{ form.username.value|stringformat:'s' }}"{% endif %}
+            maxlength="{{ form.username.field.max_length }}" 
+            placeholder="Username">
+            {% if form.username.help_text %}
+              <small class="form-text text-muted">{{ form.username.help_text }}</small>
+            {% endif %}
+          <div class="invalid-feedback">
+            <ul class="list-unstyled">
+              {% for error in form.username.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          {{ form.first_name.label_tag }}
+          <input 
+            name="{{ form.first_name.name }}" 
+            type="text" class="form-control {% if form.first_name.errors %}is-invalid{% endif %}" 
+            id="{{ form.first_name.id_for_label }}" 
+            {% if form.first_name.value != None %}value="{{ form.first_name.value|stringformat:'s' }}"{% endif %}
+            maxlength="{{ form.first_name.field.max_length }}" 
+            placeholder="Password">
+            {% if form.first_name.help_text %}
+              <small class="form-text text-muted">{{ form.first_name.help_text }}</small>
+            {% endif %}
+            <div class="invalid-feedback">
+              <ul class="list-unstyled">
+                {% for error in form.first_name.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          {{ form.last_name.label_tag }}
+          <input 
+            name="{{ form.last_name.name }}" 
+            type="text" class="form-control {% if form.last_name.errors %}is-invalid{% endif %}" 
+            id="{{ form.last_name.id_for_label }}" 
+            {% if form.last_name.value != None %}value="{{ form.last_name.value|stringformat:'s' }}"{% endif %}
+            maxlength="{{ form.last_name.field.max_length }}" 
+            placeholder="Password">
+            {% if form.last_name.help_text %}
+              <small class="form-text text-muted">{{ form.last_name.help_text }}</small>
+            {% endif %}
+            <div class="invalid-feedback">
+              <ul class="list-unstyled">
+                {% for error in form.last_name.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+          {{ form.email.label_tag }}
+          <input 
+            name="{{ form.email.name }}" 
+            type="text" class="form-control {% if form.email.errors %}is-invalid{% endif %}" 
+            id="{{ form.email.id_for_label }}" 
+            {% if form.email.value != None %}value="{{ form.email.value|stringformat:'s' }}"{% endif %}
+            maxlength="{{ form.email.field.max_length }}" 
+            placeholder="Password">
+            {% if form.email.help_text %}
+              <small class="form-text text-muted">{{ form.email.help_text }}</small>
+            {% endif %}
+            <div class="invalid-feedback">
+              <ul class="list-unstyled">
+                {% for error in form.email.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          {{ form.password1.label_tag }}
+          <input 
+            name="{{ form.password1.name }}" 
+            type="text" class="form-control {% if form.password1.errors %}is-invalid{% endif %}" 
+            id="{{ form.password1.id_for_label }}" 
+            {% if form.password1.value != None %}value="{{ form.password1.value|stringformat:'s' }}"{% endif %}
+            maxlength="{{ form.password1.field.max_length }}" 
+            placeholder="Password">
+            {% if form.password1.help_text %}
+              <small class="form-text text-muted">{{ form.password1.help_text }}</small>
+            {% endif %}
+            <div class="invalid-feedback">
+              <ul class="list-unstyled">
+                {% for error in form.password1.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+          {{ form.password2.label_tag }}
+          <input 
+            name="{{ form.password2.name }}" 
+            type="text" class="form-control {% if form.password2.errors %}is-invalid{% endif %}" 
+            id="{{ form.password2.id_for_label }}" 
+            {% if form.password2.value != None %}value="{{ form.password2.value|stringformat:'s' }}"{% endif %}
+            maxlength="{{ form.password2.field.max_length }}" 
+            placeholder="Password">
+            {% if form.password2.help_text %}
+              <small class="form-text text-muted">{{ form.password2.help_text }}</small>
+            {% endif %}
+            <div class="invalid-feedback">
+              <ul class="list-unstyled">
+                {% for error in form.password2.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+  </div>
+{% endblock %}

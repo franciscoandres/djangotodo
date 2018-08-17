@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+  <h1 class="display-3">Todos App</h1>
+  {% if user.is_authenticated %}
+    <a class="btn btn-primary btn-lg" href="{% url 'todos-index' %}" role="button">My todo's list</a>
+  {% else %}
+    <p>
+      <a href="{% url 'login' %}" class="btn btn-primary my-2">Login</a>
+      <a href="{% url 'register-user' %}" class="btn btn-secondary my-2">Create account</a>
+    </p>
+  {% endif %}
+{% endblock %}

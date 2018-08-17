@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+  <div class="col-md-4 mx-auto py-5">
+    <h3>Login</h3>
+    <form method="POST">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <ul class="list-unstyled">
+          {% for error in form.non_field_errors %}
+            <li>
+              <div class="alert alert-danger" role="alert">
+                {{ error }}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        <input 
+          name="{{ form.username.name }}" 
+          type="text" class="form-control {% if form.username.errors %}is-invalid{% endif %}" 
+          id="{{ form.username.id_for_label }}"
+          {% if form.username.value != None %}value="{{ form.username.value|stringformat:'s' }}"{% endif %}
+          maxlength="{{ form.username.field.max_length }}" 
+          placeholder="Username">
+          {% if form.username.help_text %}
+            <small class="form-text text-muted">{{ form.username.help_text }}</small>
+          {% endif %}
+        <div class="invalid-feedback">
+          <ul class="list-unstyled">
+            {% for error in form.username.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="form-group">
+        {{ form.password.label_tag }}
+        <input 
+          name="{{ form.password.name }}" 
+          type="password" class="form-control {% if form.password.errors %}is-invalid{% endif %}" 
+          id="{{ form.password.id_for_label }}" 
+          {% if form.password.value != None %}value="{{ form.password.value|stringformat:'s' }}"{% endif %}
+          maxlength="{{ form.password.field.max_length }}" 
+          placeholder="Password">
+          {% if form.password.help_text %}
+            <small class="form-text text-muted">{{ form.password.help_text }}</small>
+          {% endif %}
+          <div class="invalid-feedback">
+            <ul class="list-unstyled">
+              {% for error in form.password.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+{% endblock %}

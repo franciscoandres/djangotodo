@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    {% if messages %}
+      <ul class="list-unstyled">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+          <div class="alert alert-success" role="alert">
+            {{ message }}
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    <h1 class="display-4">Hi, {{ user.first_name }}</h1>
+    <nav class="d-flex my-4">
+      <a class="btn btn-success" href="{% url 'todos-create' %}">Create task</a>
+      <a class="btn btn-outline-danger ml-auto" href="{% url 'logout' %}">Logout</a>
+    </nav>
+    {% if object_list %}
+      {% for task in object_list %}
+      <div class="list-group list-group-flush">
+        <a href="{% url 'todos-update' task.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ task.text }}</h5>
+            {% if task.is_completed %}
+              <div>
+                <span class="badge badge-success badge-pill">Done</span>
+              </div>
+            {% endif %}
+          </div>
+          <small class="mb-1">{{ task.created_at | naturaltime }}</small>
+        </a>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p>You don't have tasks!</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}
