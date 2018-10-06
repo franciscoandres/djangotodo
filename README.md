@@ -1,11 +1,11 @@
 ### Django Todo App
 
-Todo App made with Django 2.1
+Todo App made with Django 2.1.2
 
 ##### Requirements
 
 * Python 3.6
-* Django 2.1
+* Django 2.1.2
 
 ##### Instructions
 
